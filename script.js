@@ -11,7 +11,7 @@ function getComputerChoice() {
     }
 }
 
-// GET human choice
-    // PROMPT user for input
-    // CONVERT it to lowercase
-    // RETURN it
+function getHumanChoice() {
+    let userInput = prompt('Rock, Paper, Scissors, shoot!');
+    return userInput.toLowerCase();
+}
