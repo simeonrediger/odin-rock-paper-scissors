@@ -1,11 +1,33 @@
-let humanScore = 0;
-let computerScore = 0;
+let humanScore;
+let computerScore;
+playGame();
 
-playRound();
+function playGame() {
+    console.log('The game has started!');
+    humanScore = 0;
+    computerScore = 0;
 
-function playRound() {
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
+    for (let i = 0; i < 5; i++) {
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
+        playRound(humanChoice, computerChoice);
+    }
+
+    if (humanScore > computerScore) {
+        console.log('You won the game!');
+    } else if (computerScore > humanScore) {
+        console.log('You lost the game!');
+    } else {
+        console.log('The game ended in a tie!');
+    }
+
+    if (confirm('Play again?')) {
+        console.clear();
+        playGame();
+    }
+}
+
+function playRound(humanChoice, computerChoice) {
     console.log(`You chose ${humanChoice}. Computer choose ${computerChoice}.`);
 
     const winner = determineWinner(humanChoice, computerChoice);
