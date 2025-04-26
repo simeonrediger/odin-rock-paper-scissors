@@ -6,62 +6,70 @@ playRound();
 function playRound() {
     const humanChoice = getHumanChoice();
     const computerChoice = getComputerChoice();
+    console.log(`You chose ${humanChoice}. Computer choose ${computerChoice}.`);
 
-    const humanChoiceIndex = getChoiceIndex(humanChoice);
-    const computerChoiceIndex = getChoiceIndex(computerChoice);
+    const winner = determineWinner(humanChoice, computerChoice);
+    let outcomeMessage;
 
-    if (humanChoiceIndex > computerChoiceIndex) {
-
-        if (humanChoiceIndex === 1) {
-            humanScore++;
-        } else {
-            computerScore++;
-        }
-
+    if (winner === 'human') {
+        outcomeMessage = 'You won this round!';
+        humanScore++;
+    } else if (winner === 'computer') {
+        outcomeMessage = 'You lost this round.';
+        computerScore++;
     } else {
-
-        if (computerChoiceIndex === 1) {
-            computerScore++;
-        } else {
-            humanScore++;
-        }
+        outcomeMessage = 'You tied this round.';
     }
+
+    outcomeMessage += `\nYou: ${humanScore}\tComputer: ${computerScore}`;
+    console.log(outcomeMessage);
 }
 
 function getHumanChoice() {
-    let humanChoice = prompt('Rock, Paper, Scissors, shoot!').toLowerCase();
-    console.log(`You chose ${humanChoice}.`);
-    return humanChoice;
+    return prompt('Rock, Paper, Scissors, shoot!').toLowerCase();
 }
 
 function getComputerChoice() {
     const randomChoiceIndex = Math.floor(Math.random() * 3);
-    let computerChoice;
 
     switch (randomChoiceIndex) {
         case 0:
-            computerChoice = 'rock';
-            break;
+            return 'rock';
         case 1:
-            computerChoice = 'paper';
-            break;
+            return 'paper';
         case 2:
-            computerChoice = 'scissors';
-            break;
+            return 'scissors';
     }
-
-    console.log(`Computer chose ${computerChoice}.`)
-    return computerChoice;
 }
 
-function getChoiceIndex(choice) {
-
-    switch (choice) {
+function determineWinner(humanChoice, computerChoice) {
+    switch (humanChoice) {
         case 'rock':
-            return 0;
+            switch (computerChoice) {
+                case 'rock':
+                    return 'none';
+                case 'paper':
+                    return 'computer';
+                case 'scissors':
+                    return 'human';
+            }
         case 'paper':
-            return 1;
+            switch (computerChoice) {
+                case 'rock':
+                    return 'human';
+                case 'paper':
+                    return 'none';
+                case 'scissors':
+                    return 'computer';
+            }
         case 'scissors':
-            return 2;
+            switch (computerChoice) {
+                case 'rock':
+                    return 'computer';
+                case 'paper':
+                    return 'human';
+                case 'scissors':
+                    return 'none';
+            }
     }
 }
