@@ -31,21 +31,28 @@ function playRound() {
 }
 
 function getHumanChoice() {
-    let userInput = prompt('Rock, Paper, Scissors, shoot!');
-    return userInput.toLowerCase();
+    let humanChoice = prompt('Rock, Paper, Scissors, shoot!').toLowerCase();
+    console.log(`You chose ${humanChoice}.`);
+    return humanChoice;
 }
 
 function getComputerChoice() {
     const randomChoiceIndex = Math.floor(Math.random() * 3);
+    let computerChoice;
 
     switch (randomChoiceIndex) {
         case 0:
-            return 'rock';
+            computerChoice = 'rock';
+            break;
         case 1:
-            return 'paper';
+            computerChoice = 'paper';
+            break;
         case 2:
-            return 'scissors';
+            computerChoice = 'scissors';
+            break;
     }
+
+    console.log(`Computer chose ${computerChoice}.`)
 }
 
 function getChoiceIndex(choice) {
