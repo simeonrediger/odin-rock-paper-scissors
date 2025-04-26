@@ -1,13 +1,11 @@
 let humanScore = 0;
 let computerScore = 0;
 
+playRound();
+
 function playRound() {
     const humanChoice = getHumanChoice();
     const computerChoice = getComputerChoice();
-
-    if (humanChoice === computerChoice) {
-        return;
-    }
 
     const humanChoiceIndex = getChoiceIndex(humanChoice);
     const computerChoiceIndex = getChoiceIndex(computerChoice);
@@ -53,6 +51,7 @@ function getComputerChoice() {
     }
 
     console.log(`Computer chose ${computerChoice}.`)
+    return computerChoice;
 }
 
 function getChoiceIndex(choice) {
