@@ -67,33 +67,19 @@ function getComputerChoice() {
 }
 
 function determineWinner(humanChoice, computerChoice) {
-    switch (humanChoice) {
-        case 'rock':
-            switch (computerChoice) {
-                case 'rock':
-                    return 'none';
-                case 'paper':
-                    return 'computer';
-                case 'scissors':
-                    return 'human';
-            }
-        case 'paper':
-            switch (computerChoice) {
-                case 'rock':
-                    return 'human';
-                case 'paper':
-                    return 'none';
-                case 'scissors':
-                    return 'computer';
-            }
-        case 'scissors':
-            switch (computerChoice) {
-                case 'rock':
-                    return 'computer';
-                case 'paper':
-                    return 'human';
-                case 'scissors':
-                    return 'none';
-            }
+    if (humanChoice === computerChoice) {
+        return 'none';
+    }
+
+    switch (`${humanChoice} ${computerChoice}`) {
+        case 'rock scissors':
+        case 'paper rock':
+        case 'scissors paper':
+            return 'human';
+
+        case 'rock paper':
+        case 'paper scissors':
+        case 'scissors rock':
+            return 'computer';
     }
 }
