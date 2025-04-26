@@ -10,3 +10,8 @@ function getComputerChoice() {
             return 'scissors';
     }
 }
+
+// GET human choice
+    // PROMPT user for input
+    // CONVERT it to lowercase
+    // RETURN it
