@@ -24,6 +24,8 @@ function playGame() {
     if (confirm('Play again?')) {
         console.clear();
         playGame();
+    } else {
+        console.log('Refresh the page to play again.');
     }
 }
 
