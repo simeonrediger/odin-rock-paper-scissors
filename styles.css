@@ -75,3 +75,11 @@ main {
 .monospace {
   font-family: Monaco, monospace;
 }
+
+.won {
+  color: #5eeb5e;
+}
+
+.lost {
+  color: #ff5050;
+}

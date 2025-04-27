@@ -91,8 +91,10 @@ function checkAndHandleWin() {
     const winnerPara = document.createElement('p');
 
     if (humanScore === 5) {
+        winnerPara.classList.add('won');
         winnerPara.textContent = 'You won the game!';
     } else {
+        winnerPara.classList.add('lost');
         winnerPara.textContent = 'You lost the game!';
     }
 
