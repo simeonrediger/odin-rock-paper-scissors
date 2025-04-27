@@ -1,6 +1,11 @@
+const roundTracker = document.querySelector('#round-tracker .monospace');
+const scoreboard = document.querySelector('#scoreboard');
+const choiceButtons = document.querySelector('#choices');
+const announcements = document.querySelector('#announcements');
 let humanScore;
 let computerScore;
-// playGame();
+
+choiceButtons.addEventListener('click', playRound);
 
 function playGame() {
     console.log('The game has started!');
@@ -8,8 +13,6 @@ function playGame() {
     computerScore = 0;
 
     for (let i = 0; i < 5; i++) {
-        const humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoice();
         playRound(humanChoice, computerChoice);
     }
 
@@ -29,8 +32,14 @@ function playGame() {
     }
 }
 
-function playRound(humanChoice, computerChoice) {
-    console.log(`You chose ${humanChoice}. Computer choose ${computerChoice}.`);
+function playRound(event) {
+    // console.log(`You chose ${humanChoice}. Computer choose ${computerChoice}.`);
+    if (!event.target.value) {
+        return;
+    }
+
+    const humanChoice = event.target.value;
+    const computerChoice = getComputerChoice();
 
     const winner = determineWinner(humanChoice, computerChoice);
     let outcomeMessage;
@@ -49,9 +58,12 @@ function playRound(humanChoice, computerChoice) {
     console.log(outcomeMessage);
 }
 
-function getHumanChoice() {
-    return prompt('Rock, Paper, Scissors, shoot!').toLowerCase();
-}
+// function getHumanChoice(event) {
+//     if (event.target.value) {
+        
+//     }
+//     return prompt('Rock, Paper, Scissors, shoot!').toLowerCase();
+// }
 
 function getComputerChoice() {
     const randomChoiceIndex = Math.floor(Math.random() * 3);
