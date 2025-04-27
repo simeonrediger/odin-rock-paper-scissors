@@ -1,6 +1,6 @@
 let humanScore;
 let computerScore;
-playGame();
+// playGame();
 
 function playGame() {
     console.log('The game has started!');
