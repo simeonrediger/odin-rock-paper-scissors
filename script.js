@@ -3,8 +3,8 @@ const scoreboard = document.querySelector('#scoreboard');
 const choiceButtons = document.querySelector('#choices');
 const announcements = document.querySelector('#announcements');
 const choices = ['rock', 'paper', 'scissors'];
-let humanScore;
-let computerScore;
+let humanScore = 0;
+let computerScore = 0;
 
 choiceButtons.addEventListener('click', playRound);
 
@@ -63,6 +63,7 @@ function showResults(humanChoice, computerChoice, winner) {
     }
 
     announcements.append(choicesPara, outcomePara);
+    scoreboard.textContent = `${humanScore} \u2013 ${computerScore}`;
 }
 
 function clearResults() {
