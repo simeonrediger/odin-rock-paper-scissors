@@ -1,10 +1,11 @@
-const roundTracker = document.querySelector('#round-tracker .monospace');
+const roundTracker = document.querySelector('#round-tracker');
 const scoreboard = document.querySelector('#scoreboard');
 const choiceButtons = document.querySelector('#choices');
 const announcements = document.querySelector('#announcements');
-const choices = ['rock', 'paper', 'scissors'];
 
+const choices = ['rock', 'paper', 'scissors'];
 let gameIsConcluded = false;
+let round = 0;
 let humanScore = 0;
 let computerScore = 0;
 const scoreToWin = 5;
@@ -20,6 +21,8 @@ function playRound(event) {
         resetGame();
     }
 
+    round++;
+    updateRoundTracker();
     const humanChoice = event.target.value;
     const computerChoice = getComputerChoice();
     const winner = determineWinner(humanChoice, computerChoice);
@@ -27,9 +30,15 @@ function playRound(event) {
 }
 
 function resetGame() {
+    round = 0;
     humanScore = 0;
     computerScore = 0;
     gameIsConcluded = false;
+    updateRoundTracker();
+}
+
+function updateRoundTracker() {
+    roundTracker.textContent = `Round ${round}`;
 }
 
 function getComputerChoice() {
