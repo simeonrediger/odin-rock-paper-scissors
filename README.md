@@ -1,6 +1,6 @@
 # Odin Rock Paper Scissors
 
-A simple *Rock, Paper, Scissors* game playable in the browser console.
+A simple *Rock, Paper, Scissors* game.
 
 In this project, I practice some very basic JavaScript skills, such as:
 - Pseudocode
@@ -9,3 +9,6 @@ In this project, I practice some very basic JavaScript skills, such as:
 - Built-in methods
 - Custom functions
 - Debugging
+- Event delegation
+- Event handling
+- DOM manipulation
