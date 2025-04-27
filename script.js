@@ -3,8 +3,11 @@ const scoreboard = document.querySelector('#scoreboard');
 const choiceButtons = document.querySelector('#choices');
 const announcements = document.querySelector('#announcements');
 const choices = ['rock', 'paper', 'scissors'];
+
+let gameIsConcluded = false;
 let humanScore = 0;
 let computerScore = 0;
+const scoreToWin = 5;
 
 choiceButtons.addEventListener('click', playRound);
 
@@ -13,10 +16,20 @@ function playRound(event) {
         return;
     }
 
+    if (gameIsConcluded) {
+        resetGame();
+    }
+
     const humanChoice = event.target.value;
     const computerChoice = getComputerChoice();
     const winner = determineWinner(humanChoice, computerChoice);
-    showResults(humanChoice, computerChoice, winner);
+    updateResults(humanChoice, computerChoice, winner);
+}
+
+function resetGame() {
+    humanScore = 0;
+    computerScore = 0;
+    gameIsConcluded = false;
 }
 
 function getComputerChoice() {
@@ -42,30 +55,48 @@ function determineWinner(humanChoice, computerChoice) {
     }
 }
 
-function showResults(humanChoice, computerChoice, winner) {
-    clearResults();
-
+function updateResults(humanChoice, computerChoice, winner) {
+    announcements.innerHTML = '';
     const choicesPara = document.createElement('p');
     const outcomePara = document.createElement('p');
-
     choicesPara.textContent = `
         You chose ${humanChoice}. Computer chose ${computerChoice}.
     `.trim();
 
-    if (winner === 'human') {
-        outcomePara.textContent = 'You won this round!';
-        humanScore++;
-    } else if (winner === 'computer') {
-        outcomePara.textContent = 'You lost this round.';
-        computerScore++;
-    } else {
-        outcomePara.textContent = 'You tied this round.';
+    switch (winner) {
+        case 'human':
+            outcomePara.textContent = 'You won this round!';
+            humanScore++;
+            break;
+
+        case 'computer':
+            outcomePara.textContent = 'You lost this round.';
+            computerScore++;
+            break;
+
+        default:
+            outcomePara.textContent = 'You tied this round.';
     }
 
     announcements.append(choicesPara, outcomePara);
     scoreboard.textContent = `${humanScore} \u2013 ${computerScore}`;
+    checkAndHandleWin();
 }
 
-function clearResults() {
-    announcements.innerHTML = '';
+function checkAndHandleWin() {
+    if (![humanScore, computerScore].includes(scoreToWin)) {
+        return;
+    }
+
+    const winnerPara = document.createElement('p');
+
+    if (humanScore === 5) {
+        winnerPara.textContent = 'You won the game!';
+    } else {
+        winnerPara.textContent = 'You lost the game!';
+    }
+
+    announcements.lastChild.remove();
+    announcements.append(winnerPara);
+    gameIsConcluded = true;
 }
